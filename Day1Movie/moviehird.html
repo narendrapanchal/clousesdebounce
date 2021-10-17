@@ -12,7 +12,6 @@
          display: grid;
          grid-template-columns: 30% 30% 30%;;
          grid-gap: 3%;
-         
      }
      img{
          height: 300px;
@@ -92,21 +91,27 @@
     }
 
     function oneMovie(mydata){
+        console.log("OneMovie",mydata);
         selected.innerHTML=null;
         let name=document.createElement("h4");
+        let releasedDate=document.createElement("h4");
+        let rating=document.createElement("h4");
         let namespan=document.createElement("div");
         let tempspan= document.createElement("div");
         let temp= document.createElement("img");
         name.innerText=mydata.Title;
+        releasedDate.innerText="Released Date "+mydata.Year;
+        rating.innerText="imdbID "+mydata.Title;
         temp.src=(mydata.Poster);;
         temp.style.width="600px";
         temp.style.height="300px";
-        namespan.append(name);
+        namespan.append(name,releasedDate,rating);
         tempspan.append(temp);
         selected.append(namespan,tempspan);
     }
    
-
+//Year: "2019"
+//imdbID: "tt10918410"
     
     
     

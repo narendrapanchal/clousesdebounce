@@ -135,6 +135,8 @@
     selected.innerHTML=null;
         console.log(mydata);
         let name=document.createElement("h4");
+        let releasedDate=document.createElement("h4");
+        let rating=document.createElement("h4");
         let namespan=document.createElement("div");
         let tempspan= document.createElement("div");
         let temp= document.createElement("img");
@@ -142,7 +144,9 @@
         temp.src=(`https://image.tmdb.org/t/p/w500${mydata.poster_path}`);;
         temp.style.width="600px";
         temp.style.height="300px";
-        namespan.append(name);
+        releasedDate.innerText=mydata.release_date;
+        rating.innerText=mydata.vote_average;
+        namespan.append(name,releasedDate,rating);
         tempspan.append(temp);
         selected.append(namespan,tempspan);
    }
@@ -196,21 +200,25 @@
     }
 
     function oneMovie(mydata){
+        console.log("OneMovie",mydata);
         selected.innerHTML=null;
-        console.log(mydata);
         let name=document.createElement("h4");
+        let releasedDate=document.createElement("h4");
+        let rating=document.createElement("h4");
         let namespan=document.createElement("div");
         let tempspan= document.createElement("div");
         let temp= document.createElement("img");
         name.innerText=mydata.Title;
+        releasedDate.innerText="Released Date "+mydata.Year;
+        rating.innerText="imdbID "+mydata.Title;
         temp.src=(mydata.Poster);;
         temp.style.width="600px";
         temp.style.height="300px";
-        namespan.append(name);
+        namespan.append(name,releasedDate,rating);
         tempspan.append(temp);
         selected.append(namespan,tempspan);
-      
     }
+   
        
   async function showOption(){
     var movies=await getMovie();
