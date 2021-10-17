@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="signup">
+        <form onsubmit="Signup(event)" id="signup-form">
+            <h1>Signup</h1>
+            <input type="text" id="name" placeholder="Name">
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <input type="text" id="username" placeholder="Username">
+            <input type="number" id="mobile" placeholder="Mobile">
+            <input type="text" id="description" placeholder="Description">
+            <input type="submit">
+        </form>
+    </div>
+    <a style="margin-left: 30%; margin-top: 30px;" href="login.html"><button style="margin-top: 30px;">Login</button></a>
+</body>
+</html>
+<script>
+    function Signup(e){//https://github.com/masai-school/api-mocker.wiki.git
+        e.preventDefault();
+        let form=document.getElementById("signup-form");
+        let user_data={
+            name: form.name.value,
+            email: form.email.value,
+            password: form.password.value,
+            username: form.username.value,
+            mobile: form.mobile.value,
+            description: form.description.value,
+        };
+        user_data=JSON.stringify(user_data);
+        console.log(user_data);
+        fetch("https://masai-api-mocker.herokuapp.com/auth/register",{
+            method:"POST",
+            body:user_data,
+
+            headers:{
+                "Content-Type": "application/json",
+            },
+        })
+        .then((res)=>
+        {
+            return res.json()
+        })
+        .then((res)=>
+        {
+            console.log(res);
+
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+        }
+
+
+//name":"Narendra Kumar Panchal","email":"neerajnarendra1234@gmail.com",
+//password":"1234","username":"neerajnarendra1234","mobile":"1234567765",
+// description":"sad"}
+
+
+
+
+//GET https://youtube.googleapis.com/youtube/v3/videos?maxResults=16&regionCode=IN&videoCategoryId=mostPopular&key=[YOUR_API_KEY]        
+</script>

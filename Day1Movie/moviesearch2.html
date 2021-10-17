@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     #container{
+         width: 80%;
+         margin: auto;
+         display: grid;
+         grid-template-columns: 30% 30% 30%;;
+         grid-gap: 3%;
+         
+     }
+     img{
+         height: 300px;
+         width: 200px;
+     }
+     #container >div{
+         margin-top: 50px;
+     }
+     h4{
+         color: white;
+     }
+      #city{
+          margin-left: 40%;
+          padding: 10px;
+      }
+      button{
+          padding: 10px;
+      }
+      body{
+          background-color: cadetblue;
+      }
+      #selected{
+        margin-top: 50px;
+          display: flex;
+          flex-grow: 36;
+          margin-left: 10%;
+          margin-right: 10%;
+      }
+      #selected>div{
+          margin-left: 10%;
+      }
+    </style>
+</head>
+<body>
+    <div>
+    <input type="text" placeholder="Enter Movie Name" id="city">
+    <button onclick="getMovie()">Get Movie</button>
+    <div id="selected"></div>
+    </div>
+   
+
+    <div id="container"></div>
+</body>
+</html>
+<script>
+   var container=document.getElementById("container");
+   var selected=document.getElementById("selected");
+    async function getMovie(){
+      
+        var movie_name=document.getElementById("city").value;
+        let res=await fetch(`http://www.omdbapi.com/?apikey=154a0739&s=${movie_name}`);
+        let data= await res.json();
+        data=data.Search;
+        console.log(data);
+        showMovie(data);
+    };
+    
+    function showMovie(waether){
+        container.innerHTML=null;
+      waether.forEach(function (mydata){
+        let name=document.createElement("h4");
+        let temp= document.createElement("img");
+        name.innerText=mydata.Title;
+        temp.src=(mydata.Poster);
+        let my_div=document.createElement("div");
+        temp.onclick=function(event){
+            console.log(mydata);
+            oneMovie(mydata);
+         }
+        my_div.append(temp,name);
+        container.append(my_div);
+      });
+    }
+    function oneMovie(mydata){
+        selected.innerHTML=null;
+        let name=document.createElement("h4");
+        let namespan=document.createElement("div");
+        let tempspan= document.createElement("div");
+        let temp= document.createElement("img");
+        name.innerText=mydata.Title;
+        temp.src=(mydata.Poster);;
+        temp.style.width="600px";
+        temp.style.height="300px";
+        namespan.append(name);
+        tempspan.append(temp);
+        selected.append(namespan,tempspan);
+    }
+
+    
+    
+    
+    //http://www.omdbapi.com/?apikey=154a0739
+</script>
+
+
+

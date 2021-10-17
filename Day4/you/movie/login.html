@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>            
+    <div id="login">
+        <form onsubmit="Login(event)" id="login-form">
+            <h1>Login</h1>
+            <input type="password" id="pass" placeholder="Password">
+            <input type="text" id="user" placeholder="Username">
+            <input type="submit">
+        </form>
+    </div>
+     <a style="margin-left: 10%; margin-top: 30px;" href="register.html"><button style="margin-top: 30px;"> Signup</button></a>
+</body>
+</html>
+<script>
+  
+        
+function Login(e){
+    e.preventDefault();
+    let form=document.getElementById("login-form");
+    let user_data={
+        password: form.pass.value,
+        username: form.user.value,
+    };
+    let data_to_send=JSON.stringify(user_data);
+    console.log("data_to_send",data_to_send);
+    fetch("https://masai-api-mocker.herokuapp.com/auth/login",{
+        method:'POST',
+        body:data_to_send,
+        headers:{
+                "Content-Type": "application/json",
+            }
+    })
+    .then((res)=>{
+        return res.json();
+    })
+    .then((res)=>{
+        console.log(res);
+        fetchmyData(user_data.username,res.token);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+}
+
+function fetchmyData(username,token){
+fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`,{
+    headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
+})
+.then((res)=>{
+  return res.json();
+})
+.then((res)=>{
+    console.log(res);
+    if(localStorage.getItem("username")==null){
+        localStorage.setItem("username",JSON.stringify());
+    }
+    let currentusername=res.username;
+    console.log(currentusername);
+    localStorage.setItem("username",JSON.stringify(currentusername));
+    window.open("debounce.html");
+})
+.catch((e)=>{
+    console.log(e);
+});
+}
+/*
+register.html:43 {"name":"Narendra Kumar Panchal","email":"narendrapanchal1234567890@gmail.com",
+"password":"1234","username":"neerajnarendra1234567890","mobile":"74248007470987","description":"sad"}
+**/
+</script>
+
+

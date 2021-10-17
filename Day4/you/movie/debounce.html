@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     #container{
+         width: 80%;
+         margin: auto;
+         display: grid;
+         grid-template-columns: 30% 30% 30%;;
+         grid-gap: 3%;
+         
+     }
+     img{
+         height: 300px;
+         width: 200px;
+     }
+     #container >div{
+         margin-top: 50px;
+     }
+     h4{
+         color: white;
+     }
+      #movieinput{
+         
+          padding: 10px;
+      }
+      button{
+          padding: 10px;
+      }
+      body{
+          background-color: cadetblue;
+      }
+      #selected{
+        margin-top: 50px;
+          display: flex;
+          width: 80%;
+          flex-grow: 36;
+          margin-left: 10%;
+          margin-right: 10%;
+      }
+      #selected>div{
+          margin-left: 7%;
+      }
+  #movieoptions{
+      display:none;
+      margin-left: 39%;
+      position: absolute;
+      width: 300px;
+     max-height: 200px;
+      background-color: teal;
+      margin-right: 39%;
+      overflow: scroll;
+     
+  }
+  #movieoptions{
+      display:none;
+      position:absolute;
+  }
+  #movieoptions>h1{
+      display:none;
+      position: relative;
+      font-size: 14px;
+      padding: 3px;
+  }
+
+  #movieoptions::-webkit-scrollbar {
+  display: none;
+}
+#container >img{
+  width: 400px;
+    margin-left: 100%;
+}
+
+  
+    </style>
+</head>
+<body>
+  
+        
+  
+    <div >
+        <button onclick="populer()" style=" margin-left: 35%;"> Popular</button>
+        <input type="text" oninput="debounce(showOption,2000)"placeholder="Enter Movie Name" id="movieinput">
+        <div  id="movieoptions"></div>
+        <button onclick="showMovie()">Get Movies</button>
+        <a href="register.html"><button id="signIn">SignIn</button></a>
+
+    </div>
+   
+   
+    <div id="selected" onclick="zero()"></div>
+    <div id="container" onclick="zero()"></div>
+
+</body>
+</html>
+<script>
+ 
+   var container=document.getElementById("container");
+   var selected=document.getElementById("selected");
+  async function populer(){
+    let res=await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e49cc387ab3580c42606114c5ec9fadd`);
+        let data= await res.json();
+        
+        data= data.results;
+        console.log(data);
+        container.innerHTML=null;
+     
+        data.forEach(function (mydata){
+        let name=document.createElement("h4");
+        let movieImage= document.createElement("img");
+        name.innerText=mydata.title;
+        movieImage.src=(`https://image.tmdb.org/t/p/w500${mydata.poster_path}`);
+        movieImage.onclick=function(event){
+            console.log(mydata);
+            populeroneMovie(mydata);
+         }
+        let my_div=document.createElement("div");
+        var rat=mydata.vote_average;
+        rat=Math.round(rat);
+        if(rat>8)
+        name.innerText=mydata.Title+"🌟🌟🌟🌟🌟";
+        my_div.append(movieImage,name);
+
+        container.append(my_div);
+      });
+         document.getElementById("movieinput").value="";
+      
+
+   }
+   function populeroneMovie(mydata){
+    selected.innerHTML=null;
+        console.log(mydata);
+        let name=document.createElement("h4");
+        let namespan=document.createElement("div");
+        let tempspan= document.createElement("div");
+        let temp= document.createElement("img");
+        name.innerText=mydata.title;
+        temp.src=(`https://image.tmdb.org/t/p/w500${mydata.poster_path}`);;
+        temp.style.width="600px";
+        temp.style.height="300px";
+        namespan.append(name);
+        tempspan.append(temp);
+        selected.append(namespan,tempspan);
+   }
+    async function getMovie(){
+        let movie_name=document.getElementById("movieinput").value;
+        let res=await fetch(`http://www.omdbapi.com/?apikey=154a0739&s=${movie_name}`);
+        let data= await res.json();
+        console.log(data);
+        data=data.Search;
+        console.log(data);
+        if(data){
+            return data;
+        }
+        return 0;
+    };
+    
+   async function showMovie(){
+      let movies=await getMovie();
+        container.innerHTML=null;
+        console.log(movies);
+        if(movies){
+      movies.forEach(function (mydata){
+        let name=document.createElement("h4");
+        let movieImage= document.createElement("img");
+        name.innerText=mydata.Title;
+        movieImage.src=(mydata.Poster);
+        movieImage.onclick=function(event){
+            console.log(mydata);
+            oneMovie(mydata);
+         }
+        let my_div=document.createElement("div");
+        var rat=mydata.imdbID;
+        rat=(rat[2]+rat[3]);
+        rat=(+rat)/10;
+        if(rat>8)
+        name.innerText=mydata.Title+"🌟🌟🌟🌟🌟";
+        my_div.append(movieImage,name);
+
+        container.append(my_div);
+      });
+    }
+    else{
+        let image=document.createElement("img");
+        image.src="https://tse2.mm.bing.net/th?id=OIP.9_B3rVXCh54ddr-S12cHoAAAAA&pid=Api&P=0&w=168&h=168";
+        container.append(image);
+
+    }
+         document.getElementById("movieinput").value="";
+         zero();
+
+    }
+
+    function oneMovie(mydata){
+        selected.innerHTML=null;
+        console.log(mydata);
+        let name=document.createElement("h4");
+        let namespan=document.createElement("div");
+        let tempspan= document.createElement("div");
+        let temp= document.createElement("img");
+        name.innerText=mydata.Title;
+        temp.src=(mydata.Poster);;
+        temp.style.width="600px";
+        temp.style.height="300px";
+        namespan.append(name);
+        tempspan.append(temp);
+        selected.append(namespan,tempspan);
+      
+    }
+       
+  async function showOption(){
+    var movies=await getMovie();
+    document.getElementById("movieoptions").innerHTML=null;
+    console.log(movies);
+      movies.forEach(function (mydata){
+        let name=document.createElement("h1");
+        name.innerText=mydata.Title;
+        name.onclick=function(event){
+            console.log(mydata);
+           oneMovie(mydata);
+           zero();
+           document.getElementById("movieinput").value="";
+
+
+        }
+        document.getElementById("movieoptions").append(name);
+      });
+      document.getElementById("movieoptions").style.display="block";
+       var everyMovie= document.querySelectorAll("#movieoptions > h1");
+       everyMovie.forEach(function(onedata){
+        onedata.style.display="block";
+       });
+    
+    }
+    var timerId;
+
+
+    function debounce(func,delay){
+        let movie_name=document.getElementById("movieinput").value;
+    if(movie_name.length>2){
+        
+        if(timerId){
+        clearTimeout(timerId);
+        }
+         timerId=setTimeout( function(){
+            func();
+        },delay);
+    }
+      else{
+         if(timerId){
+             clearTimeout(timerId);
+         }
+         if(movie_name.length==0)
+         zero();
+         else{
+            document.getElementById("movieoptions").style.display="none";
+         var everyMovie= document.querySelectorAll("#movieoptions > h1");
+         everyMovie.forEach(function(onedata){
+         onedata.style.display="none";
+        });  
+         }
+      }
+     }
+      function zero(){
+         document.getElementById("movieoptions").style.display="none";
+         var everyMovie= document.querySelectorAll("#movieoptions > h1");
+         everyMovie.forEach(function(onedata){
+         onedata.style.display="none";
+        });
+        document.getElementById("movieinput").value="";
+        console.log("Narendra Zero");
+     } 
+     
+     if(!(localStorage.getItem("username")==null)){
+         document.getElementById("signIn").textContent=localStorage.getItem("username");
+     }
+      
+</script>
+
+
+

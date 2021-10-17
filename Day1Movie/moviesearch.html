@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     #container{
+         width: 80%;
+         margin: auto;
+         display: grid;
+         grid-template-columns: 30% 30% 30%;;
+         grid-gap: 3%;
+         
+     }
+     img{
+         height: 300px;
+     }
+     #container >div{
+         margin-top: 50px;
+     }
+     h4{
+         color: white;
+     }
+      #city{
+          margin-left: 40%;
+          padding: 10px;
+      }
+      button{
+          padding: 10px;
+      }
+      body{
+          background-color: cadetblue;
+      }
+    </style>
+</head>
+<body>
+
+    <input type="text" placeholder="Enter Movie Name" id="city">
+    <button onclick="getMovie()">Get Movie</button>
+    <div id="selected"></div>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+   var container=document.getElementById("container");
+
+    async function getMovie(){
+      
+        var movie_name=document.getElementById("city").value;
+        let res=await fetch(`http://www.omdbapi.com/?apikey=154a0739&s=${movie_name}`);
+        var data= await res.json();
+        data=data.Search;
+        console.log(data);
+        showMovie(data);
+    }
+    
+    function showMovie(waether){
+      waether.forEach(function(data){
+        let name=document.createElement("h4");
+        
+        
+        let temp= document.createElement("img");
+        
+        name.innerText=data.Title;
+        temp.src=(data.Poster);
+        let my_div=document.createElement("div");
+       
+        my_div.append(temp,name);
+        container.append(my_div);
+      })
+  
+    }//http://www.omdbapi.com/?apikey=154a0739
+</script>
