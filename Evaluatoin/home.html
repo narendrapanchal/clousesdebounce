@@ -13,8 +13,8 @@
             grid-template-columns: 45% 45%;
         }
         img{
-           width: 150px;
-            min-height: 150px;
+           width: 180px;
+            min-height: 180px;
         }
         #container > div{
             margin-left: 5%;
@@ -50,14 +50,31 @@
        container.innerHTML=null;
        data.forEach(element => {
            let divImage=document.createElement("div");
+           let divHeadings=document.createElement("div");
            let image=document.createElement("img");
            let headings=document.createElement("h3");
+           let author=document.createElement("h4");
+           let publishedAt=document.createElement("h5");
+           author.textContent=element.author;
+           publishedAt.textContent=element.publishedAt;
            headings.textContent=element.title;
            image.src=element.urlToImage;
-           divImage.append(image,headings);
+           divHeadings.append(headings,author,publishedAt);
+           divImage.append(image,divHeadings);
+           divImage.onclick= function(event){
+               createlocalData(element);
+           }
            container.append(divImage);
 
        });
+    }
+    function createlocalData(element){
+        if(localStorage.getItem("localnews")==null){
+            localStorage.setItem("localnews",JSON.stringify(element));
+        }else{
+            localStorage.setItem("localnews",JSON.stringify(element));
+        }
+        window.open("news.html");
     }
 
 </script>
