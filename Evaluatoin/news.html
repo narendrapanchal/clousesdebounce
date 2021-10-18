@@ -5,12 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        div{
+            width: 75%;
+           margin: auto;
+        }
+    </style>
 </head>
 <body>
-    
+    <div>
+        <h2 id="heading"></h2>
+        <h5 id="auther"></h5>
+        <img id="image" alt="">
+        <h4 id="currentTime"></h4>
+        <h3 id="description"></h3>
+    </div>
+ 
+
+
 </body>
 </html>
-<script>
-    let element=JSON.parse(localStorage.getItem("localnews"));
-    console.log(element);
-</script>
+<script src="scripts/news.js"> </script>

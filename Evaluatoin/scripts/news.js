@@ -1,0 +1,12 @@
+let element=JSON.parse(localStorage.getItem("localnews"));
+console.log(element);
+let heading=document.getElementById("heading");
+let auther=document.getElementById("auther");
+let image=document.getElementById("image");
+let currentTime=document.getElementById("currentTime");
+let description=document.getElementById("description");
+image.src=element.urlToImage;
+heading.textContent=element.title;
+auther.textContent=element.author;
+description.textContent=element.description;
+currentTime.textContent=element.publishedAt;
