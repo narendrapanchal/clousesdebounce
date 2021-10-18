@@ -5,11 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+            #container{
+            display: grid;
+            width: 90%;
+            margin: auto;
+            grid-template-columns: 45% 45%;
+        }
+        img{
+           width: 180px;
+            min-height: 180px;
+        }
+        #container > div{
+            margin-left: 5%;
+            margin-top:3%;
+            display: grid;
+            grid-template-columns: 30% 60%;
+        }
+    </style>
 </head>
 <body>
-    <form action="">
-        <input type="text" required name="" id="">
-        <input type="submit" name="SEARCH" id="" >
-    </form>
+        <input type="text" required name="" id="keyWord">
+        <input type="submit" name="SEARCH" id="submit" onclick="showData()">
+    <div id="container">
+    </div>
 </body>
 </html>
+<script src="scripts/search.js"></script>

@@ -1,21 +1,29 @@
 let container=document.getElementById("container");
-// https://newsapi.org/4d5f15c9aea74c63aa7af0d544d80054
-// https://newsapi.org/v2/everything?q=olympics&sortBy=popularity&apiKey=4d5f15c9aea74c63aa7af0d544d80054
-  fetch("http://newsapi.org/v2/everything?q=random&sortBy=popularity&apiKey=4d5f15c9aea74c63aa7af0d544d80054")
-.then(res=>{
-   return res.json();
-})
-.then(res=>{
-   console.log(res.articles);
-   showData(res.articles);
-})
-.catch(e=>{
-    console.log("Narendra",e);
-})
+   function showData(){
 
-function showData(data){
+        let keyWord=document.getElementById("keyWord").value;
+        fetch(`http://newsapi.org/v2/everything?q=${keyWord}&sortBy=popularity&apiKey=4d5f15c9aea74c63aa7af0d544d80054`)
+        .then(res=>{
+            return res.json();
+        })
+        .then(res=>{
+            console.log(res.articles);
+            appendData(res.articles);
+        })
+        .catch(e=>{
+            console.log(e);
+        })
+    }
+    function appendData(data){
+        data.forEach(element => {
+            
+        });
+    }
+    
+function appendData(data){
    container.innerHTML=null;
    data.forEach(element => {
+       console.log(element);
        let divImage=document.createElement("div");
        let divHeadings=document.createElement("div");
        let image=document.createElement("img");
