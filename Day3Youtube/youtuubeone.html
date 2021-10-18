@@ -170,6 +170,7 @@ async function appendVideos(){
     videos.removeAttribute("class");
     videos.setAttribute("class","videosclass");
     nameArray=[];
+    let movies=await searchVideos();
     movies.forEach((currData)=>{
         name.innerText=currData.snippet.description;
         nameArray.push(name);
