@@ -1,0 +1,25 @@
+#navbar>input{
+    width: 20%;
+    margin: auto;
+}
+#navbar > input{
+    margin-left: 20%;
+}
+a{
+ text-decoration: none;
+ color: black;
+}
+img{
+    width:100%;
+    height: 250px;
+}
+#items{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    margin: 3% 0px 0px 7%;
+    grid-gap: 3%;
+}
+#day > img{
+height: 500px;
+width: 500px;
+}
