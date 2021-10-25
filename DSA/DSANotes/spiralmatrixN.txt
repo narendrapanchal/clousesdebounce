@@ -1,0 +1,23 @@
+function spirallyTraversingAMatrix(N, matrix){
+    //write code here
+  var out="";
+  for(var i=0;i<N/2;i++){
+     
+    for( var j=i;j<N-i-1;j++){
+          out+=matrix[i][j]+" ";
+      }
+
+      for( var j=i;j<N-i-1;j++){
+        out+=matrix[j][N-1-i]+" ";
+    }
+
+    for( var j=i;j<N-i-1;j++){
+        out+=matrix[N-i-1][N-1-j]+" ";
+    }
+
+    for( var j=i;j<N-i-1;j++){
+        out+=matrix[N-1-j][i]+" ";
+    }
+  }
+  console.log(out);
+}

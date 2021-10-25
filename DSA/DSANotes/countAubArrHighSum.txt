@@ -1,0 +1,54 @@
+function runProgram(input) {
+    // Write code here
+   input=input.trim().split("\n");
+  var  arr=input[1].trim().split(" ").map(Number);
+   input=input[0].trim().split(" ").map(Number);
+   var N=Number(input[0]);
+   var K=Number(input[1]);
+   var total=0;
+   var bigLength=0;
+   for(var i=0;i<N;i++){
+     var sum=0;
+     var length=0;
+     if(N-i>=bigLength){
+     for(var j=i;j<N;j++){
+       sum+=arr[j];
+       length++;
+       if(sum%K!=0){
+         if(length>bigLength){
+           bigLength=length;
+           total=1;
+         }
+         else if(bigLength==length)
+         total++;
+       }
+     }
+     }else 
+       break;
+  }
+   console.log(total);
+
+
+
+   
+  }
+  if (process.env.USER === "Narendra") {
+    runProgram(``);
+  } else {
+    process.stdin.resume();
+    process.stdin.setEncoding("ascii");
+    let read = "";
+    process.stdin.on("data", function (input) {
+      read += input;
+    });
+    process.stdin.on("end", function () {
+      read = read.replace(/\n$/, "");
+      read = read.replace(/\n$/, "");
+      runProgram(read);
+    });
+    process.on("SIGINT", function () {
+      read = read.replace(/\n$/, "");
+      runProgram(read);
+      process.exit(0) ;
+    });
+  }

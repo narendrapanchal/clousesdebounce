@@ -1,0 +1,27 @@
+function rotateBy90(R, matrix){
+    //write code here
+    var N=R;
+  for(var i=0;i<=N/2;i++){
+      for(var j=i;j<N-1-i;j++){
+          temp=matrix[i][j];
+        matrix[i][j]=matrix[j][N-i-1];
+          matrix[j][N-i-1]=matrix[N-i-1][N-j-1];
+          matrix[N-i-1][N-j-1]=matrix[N-j-1][i];
+          matrix[N-j-1][i]=temp;
+      }
+  }
+  for(var i=0;i<N;i++){
+      var output="";
+      for (var j=0;j<N;j++){
+          output+=matrix[i][j]+" ";
+      }
+      console.log(output);
+  }
+// for(var i=N-1;i>=0;i--){
+//     var output="";
+//     for(var j=0;j<N;j++){
+//         output+=matrix[i][j];
+//     }
+//     console.log(output);
+// }
+}
