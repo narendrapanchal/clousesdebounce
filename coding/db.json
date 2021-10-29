@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Jon Doe",
+      "age": 30,
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Jane Doe",
+      "age": 25,
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Bob Taylor",
+      "age": 45,
+      "active": false
+    }
+  ],
+  "products": [
+    {
+      "id": 2,
+      "name": "asd",
+      "price": "123"
+    },
+    {
+      "id": 3,
+      "name": "Ice Cream",
+      "price": 2.5,
+      "active": false
+    },
+    {
+      "id": "1",
+      "name": "choco",
+      "price": "56"
+    }
+  ]
+}
