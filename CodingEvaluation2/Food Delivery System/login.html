@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./CSS/styl.css">
 </head>
 <body>
     <div id="header"></div>
     <div id="login">
         <form action="" onsubmit="Login(event)" id="login-form">
-            <input type="text" id="password" placeholder="Passord" name="" >
-              <input type="text" id="user" placeholder="Usename">
+            <input type="text" id="pass" placeholder="Password" name="" >
+              <input type="text" id="user" placeholder="Username">
               <input type="submit" name="" id="">
         </form>
     </div>
@@ -21,39 +22,54 @@
     import {buttons} from "./Components/buttons.js"
     let heading=document.getElementById("header");
     heading.innerHTML=buttons();
-    function Login(e){
+</script>
+<script>
+      function Login(e){
         e.preventDefault();
         let form =document.getElementById("login-form");
         let userData={
-            password:form.password.value,
-            username:form.user.value
+            password:form.pass.value,
+            username:form.user.value,
         };
         let data_to_send=JSON.stringify(userData);
-        fetch(`https://masai-api-mocker.herokuapp.com/auth/login`,{
+        fetch("https://masai-api-mocker.herokuapp.com/auth/login",{
             method:`POST`,
             body:data_to_send,
             headers:{
                 "Content-Type":"application/json",
-                Authorization:`Bearer ${token}`,
-            },
+            }
         })
         .then (res=>{
             return res.json();
         })
         .then(res=>{
-         if(localStorage.getItem("username")==null){
-             localStorage.setItem("usernme",JSON.stringify());
-         }
-         let currentusername=res.username;
-         localStorage.setItem("username",JSON.stringify(currentusername));
-         window.localStorage.href="./index.html"
-
+            console.log(res.token);
+            fetchData(userData.username,res.token)
         })
         .catch(e=>{
             console.log(e);
         })
+        function fetchData(username,token){
+            fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`,{
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then (res=>{
+                return res.json();
+            })
+            .then(res=>{
+                if(localStorage.getItem("username")==null){
+             localStorage.setItem("usernme",JSON.stringify());
+         }
+         let currentusername=res.username;
+         localStorage.setItem("username",JSON.stringify(currentusername));
+         window.open="./index.html"
+
+            })
+        }
 
     }
-
 
 </script>
