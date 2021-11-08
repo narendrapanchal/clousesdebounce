@@ -5,17 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./CSS/styl.css">
 </head>
 <body>
+    <div id="header"></div>
     <div id="signup">
         <form action="" onsubmit="Signup(event)" id="signup-form">
-        <h1>Signup</h1>
         <input type="text" name="" id="name" placeholder="Name">
         <input type="text" name="" id="email" placeholder="Email">
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" placeholder="password">
         <input type="text" name="" id="username" placeholder="username">
         <input type="number" name="" id="mobile" placeholder="mobile">
          <input type="text" name="" id="description" placeholder="description">
+         <input type="submit" name="" id="">
         </form>
     </div>
 </body>
@@ -24,7 +26,9 @@
     import {buttons} from "./Components/buttons.js"
     let heading=document.getElementById("header");
     heading.innerHTML=buttons();
-function Signup(e){
+</script>
+<script>
+     function Signup(e){
     e.preventDafault();
     let form=document.getElementById("signup-form");
     let userdata={
@@ -35,7 +39,7 @@ function Signup(e){
         mobile: form.mobile.value,
         description: form.description.value,
     }
-    let userdata=JSON.stringify(username);
+     userdata=JSON.stringify(username);
     fetch(`https://masai-api-mocker.herokuapp.com/auth/login`,{
             method:`POST`,
             body:userdata,
@@ -48,7 +52,7 @@ function Signup(e){
         })
         .then (res=>{
             console.log(res)
-            window.localStorage.href="./index.html";
+            window.open="./login.html";
         })
         .catch(e=>{
             console.log(e);
