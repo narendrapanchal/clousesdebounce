@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="header"></div>
+    <div id="login">
+        <form action="" onsubmit="Login(event)" id="login-form">
+            <input type="text" id="password" placeholder="Passord" name="" >
+              <input type="text" id="user" placeholder="Usename">
+              <input type="submit" name="" id="">
+        </form>
+    </div>
+</body>
+</html>
+<script type="module">
+    import {buttons} from "./Components/buttons.js"
+    let heading=document.getElementById("header");
+    heading.innerHTML=buttons();
+    function Login(e){
+        e.preventDefault();
+        let form =document.getElementById("login-form");
+        let userData={
+            password:form.password.value,
+            username:form.user.value
+        };
+        let data_to_send=JSON.stringify(userData);
+        fetch(`https://masai-api-mocker.herokuapp.com/auth/login`,{
+            method:`POST`,
+            body:data_to_send,
+            headers:{
+                "Content-Type":"application/json",
+                Authorization:`Bearer ${token}`,
+            },
+        })
+        .then (res=>{
+            return res.json();
+        })
+        .then(res=>{
+         if(localStorage.getItem("username")==null){
+             localStorage.setItem("usernme",JSON.stringify());
+         }
+         
+
+        })
+
+    }
+
+
+</script>
