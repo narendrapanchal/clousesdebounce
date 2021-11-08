@@ -44,8 +44,13 @@
          if(localStorage.getItem("username")==null){
              localStorage.setItem("usernme",JSON.stringify());
          }
-         
+         let currentusername=res.username;
+         localStorage.setItem("username",JSON.stringify(currentusername));
+         window.localStorage.href="./index.html"
 
+        })
+        .catch(e=>{
+            console.log(e);
         })
 
     }
