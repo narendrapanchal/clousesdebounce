@@ -1,0 +1,14 @@
+{
+  "name": "tax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tax.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}
