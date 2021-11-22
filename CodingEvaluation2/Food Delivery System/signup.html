@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="header"></div>
-    <div id="signup">
+    <div id="signu">
         <form action="" onsubmit="Signup(event)" id="signup-form">
         <input type="text" name="" id="name" placeholder="Name">
         <input type="text" name="" id="email" placeholder="Email">
@@ -28,8 +28,8 @@
     heading.innerHTML=buttons();
 </script>
 <script>
-     function Signup(e){
-    e.preventDafault();
+     function Signup(event){
+        event.preventDefault();
     let form=document.getElementById("signup-form");
     let userdata={
         name:form.name.value,
@@ -39,8 +39,9 @@
         mobile: form.mobile.value,
         description: form.description.value,
     }
-     userdata=JSON.stringify(username);
-    fetch(`https://masai-api-mocker.herokuapp.com/auth/login`,{
+     userdata=JSON.stringify(userdata);
+     console.log(userdata);
+    fetch(`https://masai-api-mocker.herokuapp.com/auth/register`,{
             method:`POST`,
             body:userdata,
             headers:{
@@ -48,15 +49,20 @@
             },
         })
         .then (res=>{
+        
             return res.json();
+
         })
         .then (res=>{
-            console.log(res)
-            window.open="./login.html";
+            console.log(res);
         })
         .catch(e=>{
             console.log(e);
         
         })
-}
+} console.log("Narendra");
 </script>
+<!--
+{"name":"gas","email":"kjebabfuow12893@gmail.com","password":"lkjhgfdsa","username":"lkjhgfdsa","mobile":"009876543","description":"lkjhfdsappoiuytrew"}    {"name":"jasdas","email":"pkhjkk@gmail.com","password":"pkhkyah","username":"pkhkyakj","mobile":"1223145","description":"kjdsbjz"}
+    {"name":"jasdas","email":"pkhjkk@gmail.com","password":"pkhkyah","username":"pkhkyakj","mobile":"122314589","description":"kjdsbjz"} 
+    "name":"jasdas","email":"pkhjkuik@gmail.com","password":"pkhkyahiu","username":"pkhkyakj8i","mobile":"12231809970","description":"kjdsbjz"} -->
