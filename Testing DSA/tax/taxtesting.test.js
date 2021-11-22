@@ -1,6 +1,8 @@
 const {tax}=require(`./tax`);
+
 test("Calculating tax",()=>{
-    expect(tax(10000,30000)).toBe(0);
+    // earn money and saved moeney
+    expect(tax(100000,30000)).toBe(0);
 })
 test("Calculating tax",()=>{
     expect(tax(1000000,10000)).toBe(103000);
